@@ -34,3 +34,6 @@ public class AppointmentController {
     public String bookAppointment(@ModelAttribute Appointment appointment) {
         appointmentService.createAppointment(appointment);
         return "redirect:/";
+    }
+
+    // API Endpoint: Send Data to the Frontend Calendar (JSON)
