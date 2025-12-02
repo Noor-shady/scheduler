@@ -21,3 +21,4 @@ public class AppointmentController {
     @GetMapping("/")
     public String home() {
         return "index";
+    }
