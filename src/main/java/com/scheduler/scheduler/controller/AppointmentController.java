@@ -17,3 +17,7 @@ public class AppointmentController {
 
     @Autowired
     private AppointmentService appointmentService;
+
+    @GetMapping("/")
+    public String home() {
+        return "index";
