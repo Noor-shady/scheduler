@@ -25,3 +25,5 @@ public class AppointmentController {
 
     @GetMapping("/booking")
     public String showBookingForm(Model model) {
+        model.addAttribute("appointment", new Appointment());
+        return "booking";
