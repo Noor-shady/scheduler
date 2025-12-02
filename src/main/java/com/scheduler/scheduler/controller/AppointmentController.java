@@ -22,3 +22,6 @@ public class AppointmentController {
     public String home() {
         return "index";
     }
+
+    @GetMapping("/booking")
+    public String showBookingForm(Model model) {
