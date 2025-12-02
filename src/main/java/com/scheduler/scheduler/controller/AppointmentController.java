@@ -27,3 +27,10 @@ public class AppointmentController {
     public String showBookingForm(Model model) {
         model.addAttribute("appointment", new Appointment());
         return "booking";
+    }
+
+    // Handle the Form Submission (Save the appointment)
+    @PostMapping("/book")
+    public String bookAppointment(@ModelAttribute Appointment appointment) {
+        appointmentService.createAppointment(appointment);
+        return "redirect:/";
