@@ -18,3 +18,8 @@ public class Appointment {
     private LocalDateTime startDateTime;
     private LocalDateTime endDateTime;
 
+    public Appointment() {
+    }
+
+
+
