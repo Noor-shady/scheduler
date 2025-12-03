@@ -21,5 +21,13 @@ public class Appointment {
     public Appointment() {
     }
 
+    public Appointment(String customerName, String customerEmail, LocalDateTime startDateTime, LocalDateTime endDateTime) {
+        this.customerName = customerName;
+        this.customerEmail = customerEmail;
+        this.startDateTime = startDateTime;
+        this.endDateTime = endDateTime;
+    }
+
+
 
 
