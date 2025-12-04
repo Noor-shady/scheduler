@@ -1,4 +1,6 @@
 package com.scheduler.scheduler.model;
 
-public class User {
-}
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "app_users")
