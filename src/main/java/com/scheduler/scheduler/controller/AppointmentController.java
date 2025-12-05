@@ -1,14 +1,11 @@
 package com.scheduler.scheduler.controller;
 
-// Spring Imports (These fix the @Controller and @Autowired red errors)
+import com.scheduler.scheduler.model.Appointment;
+import com.scheduler.scheduler.service.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-// Project Imports (These fix the Appointment and AppointmentService red errors)
-import com.scheduler.scheduler.model.Appointment;
-import com.scheduler.scheduler.service.AppointmentService;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -39,7 +36,6 @@ public class AppointmentController {
         return "redirect:/";
     }
 
-    // API Endpoint: Send Data to the Frontend Calendar (JSON)
     @GetMapping("/api/appointments")
     @ResponseBody
     public List<Map<String, Object>> getAppointments() {
@@ -55,3 +51,4 @@ public class AppointmentController {
         }
         return events;
     }
+}
