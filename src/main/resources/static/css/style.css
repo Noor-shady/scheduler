@@ -21,3 +21,10 @@ body {
     transition: transform 0.2s;
 }
 
+#calendar {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    background: white;
+    border-radius: 12px;
+}
