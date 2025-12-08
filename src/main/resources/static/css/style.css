@@ -41,3 +41,11 @@ body {
     border: none !important;
     opacity: 1 !important;
 }
+
+.fc-event {
+    cursor: pointer;
+    border-radius: 4px;
+    border: none;
+    padding: 2px 5px;
+    font-size: 0.9em;
+}
