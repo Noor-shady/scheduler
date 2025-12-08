@@ -28,3 +28,16 @@ body {
     background: white;
     border-radius: 12px;
 }
+
+.fc-toolbar-title {
+    font-size: 1.5rem !important;
+    color: #2c3e50;
+    font-weight: 700;
+}
+
+/* Style the "Today" button */
+.fc-today-button {
+    background-color: #0d6efd !important;
+    border: none !important;
+    opacity: 1 !important;
+}
