@@ -19,4 +19,10 @@ public class OpenBrowser {
                 Desktop.getDesktop().browse(new URI("http://localhost:8080"));
             }
         } catch (Exception e) {
+            System.out.println("👉 Open this link: http://localhost:8080");
+            e.printStackTrace();
+        }
+    }
+}
+
 
