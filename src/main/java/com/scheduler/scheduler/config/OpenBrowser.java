@@ -12,3 +12,6 @@ public class OpenBrowser {
 
     @EventListener(ApplicationReadyEvent.class)
     public void launchBrowser() {
+        System.out.println("🚀 Application started! Opening browser...");
+
+        try {
