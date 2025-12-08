@@ -15,3 +15,8 @@ public class OpenBrowser {
         System.out.println("🚀 Application started! Opening browser...");
 
         try {
+            if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+                Desktop.getDesktop().browse(new URI("http://localhost:8080"));
+            }
+        } catch (Exception e) {
+
