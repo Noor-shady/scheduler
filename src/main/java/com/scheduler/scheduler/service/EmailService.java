@@ -15,3 +15,14 @@ public class EmailService {
         try {
             SimpleMailMessage message = new SimpleMailMessage();
             message.setFrom("scheduler@example.com");
+            message.setTo(toEmail);
+            message.setSubject(subject);
+            message.setText(body);
+
+            mailSender.send(message);
+            System.out.println("✅ Email successfully sent to " + toEmail);
+        } catch (Exception e) {
+            System.err.println("❌ Error sending email: " + e.getMessage());
+        }
+    }
+}

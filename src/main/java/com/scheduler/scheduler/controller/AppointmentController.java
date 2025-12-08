@@ -1,11 +1,12 @@
 package com.scheduler.scheduler.controller;
 
-import com.scheduler.scheduler.model.Appointment;
-import com.scheduler.scheduler.service.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import com.scheduler.scheduler.model.Appointment;
+import com.scheduler.scheduler.service.AppointmentService;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -39,14 +40,14 @@ public class AppointmentController {
     @GetMapping("/api/appointments")
     @ResponseBody
     public List<Map<String, Object>> getAppointments() {
-        List<Appointment> allAppointments = appointmentService.getAllAppointments();
+        List<Appointment> all = appointmentService.getAllAppointments();
         List<Map<String, Object>> events = new ArrayList<>();
 
-        for (Appointment appointment : allAppointments) {
+        for (Appointment a : all) {
             Map<String, Object> event = new HashMap<>();
-            event.put("title", appointment.getCustomerName());
-            event.put("start", appointment.getStartDateTime().toString());
-            event.put("end", appointment.getEndDateTime().toString());
+            event.put("title", a.getCustomerName());
+            event.put("start", a.getStartDateTime().toString());
+            event.put("end", a.getEndDateTime().toString());
             events.add(event);
         }
         return events;
