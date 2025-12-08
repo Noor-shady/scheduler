@@ -11,4 +11,16 @@ document.addEventListener('DOMContentLoaded', function() {
         },
 
         events: '/api/appointments',
+        eventColor: '#3788d8',
+        eventTextColor: '#ffffff',
+
+        // What happens when you click an appointment?
+        eventClick: function(info) {
+            alert('Appointment for: ' + info.event.title +
+                '\nTime: ' + info.event.start.toLocaleTimeString());
+        }
+    });
+
+    calendar.render();
+});
 
