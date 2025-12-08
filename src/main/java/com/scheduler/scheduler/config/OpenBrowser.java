@@ -4,25 +4,26 @@ import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
-import java.awt.*;
-import java.net.URI;
-
 @Component
 public class OpenBrowser {
 
     @EventListener(ApplicationReadyEvent.class)
     public void launchBrowser() {
-        System.out.println("🚀 Application started! Opening browser...");
+        System.out.println("🚀 App started! Attempting to open browser...");
 
         try {
-            if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
-                Desktop.getDesktop().browse(new URI("http://localhost:8080"));
+            String os = System.getProperty("os.name").toLowerCase();
+            String url = "http://localhost:8080";
+
+            if (os.contains("mac")) {
+                Runtime.getRuntime().exec("open " + url);
+            } else if (os.contains("win")) {
+                Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler " + url);
+            } else {
+                Runtime.getRuntime().exec("xdg-open " + url);
             }
         } catch (Exception e) {
-            System.out.println("👉 Open this link: http://localhost:8080");
-            e.printStackTrace();
+            System.out.println("⚠️ Could not open browser automatically. Please go to http://localhost:8080");
         }
     }
 }
-
-
