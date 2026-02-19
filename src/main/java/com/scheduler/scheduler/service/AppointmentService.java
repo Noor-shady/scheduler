@@ -2,30 +2,34 @@ package com.scheduler.scheduler.service;
 
 import com.scheduler.scheduler.model.Appointment;
 import com.scheduler.scheduler.repository.AppointmentRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
 public class AppointmentService {
 
+    private static final Logger logger = LoggerFactory.getLogger(AppointmentService.class);
+
     @Autowired
     private AppointmentRepository repository;
+
+    @Autowired
+    private EmailService emailService;
 
     public List<Appointment> getAllAppointments() {
         return repository.findAll();
     }
 
-    // Save a new appointment (This handles the Booking Form)
+    @Transactional
     public void createAppointment(Appointment appointment) {
-        // Business Logic:
-        // If the frontend didn't send an end time, we default to 1 hour.
         if (appointment.getEndDateTime() == null) {
             appointment.setEndDateTime(appointment.getStartDateTime().plusHours(1));
         }
 
-        // Save to Database
         repository.save(appointment);
-    }
-}
+        logger.info("Saved new appointment for: {}", appointment.getCustomerName());

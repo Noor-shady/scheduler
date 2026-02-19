@@ -12,3 +12,12 @@ import java.util.List;
 @Repository
 public interface AppointmentRepository extends JpaRepository<Appointment, Long> {
 
+    List<Appointment> findByStartDateTimeBetween(LocalDateTime start, LocalDateTime end);
+
+    // Prevent Double Booking: Custom JPQL query to check if a new appointment overlaps with an existing one
+    @Query("SELECT COUNT(a) > 0 FROM Appointment a WHERE (a.startDateTime < :end AND a.endDateTime > :start)")
+    boolean existsByOverlappingTime(@Param("start") LocalDateTime start, @Param("end") LocalDateTime end);
+
+    // User Dashboard Feature: Find all appointments for a specific customer
+    List<Appointment> findByCustomerEmail(String email);
+}
