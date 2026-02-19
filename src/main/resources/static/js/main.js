@@ -14,3 +14,9 @@ document.addEventListener('DOMContentLoaded', () => {
             center: 'title',
             right: 'dayGridMonth,timeGridWeek,timeGridDay'
         },
+
+        events: '/api/appointments',
+        eventSourceFailure: (errorObj) => {
+            console.error('Failed to fetch appointments from the API:', errorObj);
+            // In a production app, I would trigger a Bootstrap Toast error message here
+        },
