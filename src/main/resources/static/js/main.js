@@ -26,3 +26,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // UX Enhancement: Cleaner time formatting
         eventClick: (info) => {
+            info.jsEvent.preventDefault();
+
+            const eventTitle = info.event.title;
+
+            // Format time nicely
+            const startTime = info.event.start.toLocaleTimeString([], {
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+
+            alert(`📅 Appointment: ${eventTitle}\n⏰ Time: ${startTime}`);
+        }
+    });
+
+    calendar.render();
+});
