@@ -1,8 +1,10 @@
 package com.scheduler.scheduler.controller;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import com.scheduler.scheduler.model.Appointment;
@@ -30,11 +32,16 @@ public class AppointmentController {
         return "booking";
     }
 
-    // Handle the Form Submission (Save the appointment)
+    // Handle Form Submission with Validation
     @PostMapping("/book")
-    public String bookAppointment(@ModelAttribute Appointment appointment) {
+    public String bookAppointment(@Valid @ModelAttribute Appointment appointment, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            // Return to the form if there are validation errors
+            return "booking";
+        }
+
         appointmentService.createAppointment(appointment);
-        return "redirect:/";
+        return "redirect:/?success";
     }
 
     @GetMapping("/api/appointments")
@@ -45,6 +52,7 @@ public class AppointmentController {
 
         for (Appointment a : all) {
             Map<String, Object> event = new HashMap<>();
+            event.put("id", a.getId());
             event.put("title", a.getCustomerName());
             event.put("start", a.getStartDateTime().toString());
             event.put("end", a.getEndDateTime().toString());

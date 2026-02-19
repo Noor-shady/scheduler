@@ -1,6 +1,9 @@
 package com.scheduler.scheduler.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "app_users")
@@ -10,13 +13,24 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // No two users can have the same username
-    @Column(unique = true)
+    // Application Validation + Database Constraints
+    @NotBlank(message = "Username is required")
+    @Size(min = 3, max = 50, message = "Username must be between 3 and 50 characters")
+    @Column(unique = true, nullable = false, length = 50)
     private String username;
 
+    @NotBlank(message = "Password is required")
+    @Size(min = 8, message = "Password must be at least 8 characters long")
+    @Column(nullable = false)
     private String password;
+
+    @NotBlank(message = "Email is required")
+    @Email(message = "Please provide a valid email address")
+    @Column(unique = true, nullable = false)
     private String email;
-    // Examples: "ADMIN", "CUSTOMER"
+
+    @NotBlank(message = "Role is required")
+    @Column(nullable = false)
     private String role;
 
     public User() {
@@ -29,6 +43,7 @@ public class User {
         this.role = role;
     }
 
+    // --- Getters and Setters ---
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
