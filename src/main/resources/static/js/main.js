@@ -20,3 +20,9 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('Failed to fetch appointments from the API:', errorObj);
             // In a production app, I would trigger a Bootstrap Toast error message here
         },
+
+        eventColor: 'var(--primary-color, #0d6efd)',
+        eventTextColor: '#ffffff',
+
+        // UX Enhancement: Cleaner time formatting
+        eventClick: (info) => {
