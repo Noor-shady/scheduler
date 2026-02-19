@@ -33,3 +33,11 @@ public class AppointmentService {
 
         repository.save(appointment);
         logger.info("Saved new appointment for: {}", appointment.getCustomerName());
+
+        String subject = "Appointment Confirmation";
+        String body = "Hello " + appointment.getCustomerName() + ",\n\nYour appointment is confirmed for "
+                + appointment.getStartDateTime() + ".\n\nThank you!";
+
+        emailService.sendEmail(appointment.getCustomerEmail(), subject, body);
+    }
+}
