@@ -13,3 +13,9 @@
     --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.1);
     --border-radius: 12px;
 }
+
+body {
+    background-color: var(--bg-color);
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    color: var(--text-main);
+}
