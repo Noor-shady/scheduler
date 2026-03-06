@@ -9,6 +9,10 @@ import org.springframework.scheduling.annotation.EnableAsync;
 public class SchedulerApplication {
 
     public static void main(String[] args) {
+        // Force Java to detect the screen/keyboard
+        System.setProperty("java.awt.headless", "false");
+
         SpringApplication.run(SchedulerApplication.class, args);
     }
+
 }

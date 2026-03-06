@@ -27,3 +27,39 @@ public class OpenBrowser {
             if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
                 Desktop.getDesktop().browse(new URI(url));
             } else {
+                openBrowserFallback(url);
+            }
+        } catch (Exception e) {
+            // Log the error silently instead of crashing the app
+            System.err.println("⚠️ Could not open browser automatically: " + e.getMessage());
+            System.out.println("👉 Please open manually: " + url);
+        }
+    }
+
+    private void openBrowserFallback(String url) {
+        try {
+            String os = System.getProperty("os.name").toLowerCase();
+            Runtime rt = Runtime.getRuntime();
+
+            if (os.contains("win")) {
+                rt.exec("rundll32 url.dll,FileProtocolHandler " + url);
+            } else if (os.contains("mac")) {
+                rt.exec("open " + url);
+            } else if (os.contains("nix") || os.contains("nux")) {
+                // Try common Linux browsers
+                String[] browsers = {"xdg-open", "google-chrome", "firefox"};
+                for (String browser : browsers) {
+                    try {
+                        rt.exec(new String[]{browser, url});
+                        // Stop if one works
+                        break;
+                    } catch (Exception e) {
+                        // Continue to next browser
+                    }
+                }
+            }
+        } catch (Exception e) {
+            // Ignore fallback errors
+        }
+    }
+}
